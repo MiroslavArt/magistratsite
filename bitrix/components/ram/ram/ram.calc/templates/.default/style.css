@@ -1,0 +1,126 @@
+.ram-calc__calculator-wrap {--ramcalc-color: #333; --ramcalc-background-color: #fff; --ramcalc-active-color: #22e; --ramcalc-border-color: #aaa; --ramcalc-offset: 20px; --ramcalc-border: 1px; --ramcalc-border-radius: 2px; font: inherit; line-height: inherit; color: var(--ramcalc-color); text-align: left; display: flex; flex-direction: column; border: calc(var(--ramcalc-border)) solid var(--ramcalc-border-color); border-radius: calc(var(--ramcalc-border-radius)); background: var(--ramcalc-background-color);}
+.ram-calc__calculator-wrap *, .ram-calc__calculator-wrap *:before, .ram-calc__calculator-wrap *:after {box-sizing: border-box; outline: none;}
+.ram-calc__popup {position: fixed; z-index: 10000; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.5); padding: calc(var(--ramcalc-offset) * 2);}
+.ram-calc__popup-wrap {padding: calc(var(--ramcalc-offset) * 2); background: var(--ramcalc-background-color); border-radius: calc(var(--ramcalc-border-radius)); position: relative;}
+.ram-calc__popup-content {text-align: center;}
+.ram-calc__popup-close {position: absolute; top: calc(var(--ramcalc-offset) * 0.25); right: calc(var(--ramcalc-offset) * 0.25); width: calc(var(--ramcalc-offset) * 1.5); height: calc(var(--ramcalc-offset) * 1.5); display: block;}
+.ram-calc__popup-close:before {position: absolute; display: block; content: ''; background-color: var(--ramcalc-color); border-radius: var(--ramcalc-border-radius); width: calc(var(--ramcalc-offset) * 1.2); height: calc(var(--ramcalc-offset) * 0.075); transform: rotate(-45deg); left: calc(var(--ramcalc-offset) * 0.15); top: calc(50% - var(--ramcalc-offset) * 0.0375);}
+.ram-calc__popup-close:after {position: absolute; display: block; content: ''; background-color: var(--ramcalc-color); border-radius: var(--ramcalc-border-radius); width: calc(var(--ramcalc-offset) * 1.2); height: calc(var(--ramcalc-offset) * 0.075); transform: rotate(45deg); left: calc(var(--ramcalc-offset) * 0.15); top: calc(50% - var(--ramcalc-offset) * 0.0375);}
+.ram-calc__calculator-tabs {font-size: 80%; display: flex; flex-wrap: wrap; padding: calc(var(--ramcalc-offset)); border-bottom: var(--ramcalc-border) solid var(--ramcalc-border-color);}
+.ram-calc__tab {cursor: pointer; padding: calc(var(--ramcalc-offset) * 0.25 + var(--ramcalc-border-radius) * 0.25); border-radius: calc(var(--ramcalc-border-radius)); display: flex; gap: calc(var(--ramcalc-offset) * 0.5); align-items: center;}
+.ram-calc__tab-delete {background: var(--ramcalc-background-color); width: var(--ramcalc-offset); height: var(--ramcalc-offset); position: relative;}
+.ram-calc__tab-delete:before {position: absolute; display: block; content: ''; background-color: var(--ramcalc-color); border-radius: var(--ramcalc-border-radius); width: calc(var(--ramcalc-offset) * 0.8); height: calc(var(--ramcalc-offset) * 0.05); transform: rotate(-45deg); left: calc(var(--ramcalc-offset) * 0.1); top: calc(50% - var(--ramcalc-offset) * 0.025);}
+.ram-calc__tab-delete:after {position: absolute; display: block; content: ''; background-color: var(--ramcalc-color); border-radius: var(--ramcalc-border-radius); width: calc(var(--ramcalc-offset) * 0.8); height: calc(var(--ramcalc-offset) * 0.05); transform: rotate(45deg); left: calc(var(--ramcalc-offset) * 0.1); top: calc(50% - var(--ramcalc-offset) * 0.025);}
+.ram-calc__tab:first-child:nth-last-child(2) .ram-calc__tab-delete {display: none;}
+.ram-calc__tab_active {color: var(--ramcalc-color); background: var(--ramcalc-active-color); color: var(--ramcalc-background-color);}
+.ram-calc__calculator {padding: calc(var(--ramcalc-offset));}
+.ram-calc__calculator_unactive {display: none;}
+.ram-calc__calculator form {display: flex; flex-direction: column; gap: var(--ramcalc-offset);}
+.ram-calc__calculator-title {padding: 0 0 var(--ramcalc-offset); font-weight: bold; font-size: 125%; line-height: 100%;}
+.ram-calc__calculator-properties {display: flex; flex-direction: column; gap: var(--ramcalc-offset);}
+.ram-calc__property {display: flex; flex-direction: column; gap: calc(var(--ramcalc-offset) * 0.5);}
+.ram-calc__property-title {font-weight: bold;}
+.ram-calc__property-hint {font-size: 90%; line-height: 100%; opacity: 0.8;}
+.ram-calc__property-list {}
+.ram-calc__property-list-value {display: none;}
+.ram-calc__property-list_select {}
+.ram-calc__property-list_select select {width: 100%; padding: 0 calc(var(--ramcalc-offset) * 0.25 + var(--ramcalc-border-radius) * 0.25); border: var(--ramcalc-border) solid var(--ramcalc-border-color); outline: none; font: inherit; border-radius: var(--ramcalc-border-radius); font-size: 90%; line-height: 100%; height: calc(var(--ramcalc-offset) * 2);}
+.ram-calc__property-list_select select[multiple] {padding: 0; height: calc(var(--ramcalc-offset) * 2 * 3); border-top-right-radius: 0; border-bottom-right-radius: 0; padding-right: 0; overflow-y: scroll;}
+.ram-calc__property-list_select select[multiple] option {padding: 0 calc(var(--ramcalc-offset) * 0.25 + var(--ramcalc-border-radius) * 0.25);}
+.ram-calc__property-list_select select option[disabled] {opacity: 0.5;}
+.ram-calc__property-list_select select option[data-hidden] {display: none;}
+.ram-calc__property-list_select:hover select:not([disabled]), .ram-calc__property-list_select select:not([disabled]):active, .ram-calc__property-list_select:focus-within select:not([disabled]) {border-color: var(--ramcalc-active-color);}
+.ram-calc__property-list_items {display: flex; gap: calc(var(--ramcalc-offset) * 0.5); flex-wrap: wrap;}
+.ram-calc__property[data-hidden] {display: none;}
+.ram-calc__value {position: relative; flex: 1 1 auto;}
+.ram-calc__value_noimage {display: flex; gap: calc(var(--ramcalc-offset) * 0.5);}
+.ram-calc__value label {display: block; cursor: pointer; display: flex; gap: calc(var(--ramcalc-offset) * 0.5);}
+.ram-calc__value input {position: absolute; z-index: -100; opacity: 0;}
+.ram-calc__value-title {display: flex; gap: calc(var(--ramcalc-offset) * 0.5); align-items: center; font-size: 90%; line-height: 100%;}
+.ram-calc__value-hint {position: relative;}
+.ram-calc__value-hint:before {content: "?"; opacity: 0.6; display: flex; border: var(--ramcalc-border) solid var(--ramcalc-border-color); border-radius: var(--ramcalc-border-radius); width: var(--ramcalc-offset); height: var(--ramcalc-offset); align-items: center; justify-content: center; font-size: 90%;}
+.ram-calc__value-hint-value {font-size: 80%; line-height: 120%; display: none; position: absolute; max-width: 200px; right: 0; top: calc(var(--ramcalc-offset) * 1.25); background: var(--ramcalc-background-color); padding: calc(var(--ramcalc-offset) / 2); border: calc(var(--ramcalc-border)) solid var(--ramcalc-border-color); border-radius: calc(var(--ramcalc-border-radius) * 0.25); flex: 1 0 auto; z-index: 10000; pointer-events: none; inline-size: max-content;}
+.ram-calc__value-hint:hover:before, .ram-calc__value-hint:active {background: var(--ramcalc-active-color); color: var(--ramcalc-background-color); cursor: pointer; opacity: 1;}
+.ram-calc__value-hint:hover .ram-calc__value-hint-value, .ram-calc__value-hint:active .ram-calc__value-hint-value {display: flex;}
+.ram-calc__value_noimage .ram-calc__value-title:before {content: ''; position: relative; box-shadow: 0 0 0 var(--ramcalc-border) var(--ramcalc-border-color); border: calc(var(--ramcalc-offset) * 0.2) solid var(--ramcalc-background-color); background: transparent; display: block; width: var(--ramcalc-offset); height: var(--ramcalc-offset); flex: 0 0 auto; margin-bottom: auto;}
+.ram-calc__value_noimage input[type='checkbox'] + .ram-calc__value-title:before {border-radius: calc(var(--ramcalc-border-radius) * 0.25);}
+.ram-calc__value_noimage input[type='radio'] + .ram-calc__value-title:before {border-radius: var(--ramcalc-offset);}
+.ram-calc__value_noimage input:checked + .ram-calc__value-title:before {background: var(--ramcalc-active-color);}
+.ram-calc__value_noimage label:hover input:not([disabled]) + .ram-calc__value-title, 
+.ram-calc__value_noimage input:active:not([disabled]) + .ram-calc__value-title, 
+.ram-calc__value_noimage:focus-within input:not([disabled]) + .ram-calc__value-title {color: var(--ramcalc-active-color);}
+.ram-calc__value_noimage input[disabled] + .ram-calc__value-title {opacity: 0.5; cursor: default;}
+.ram-calc__value_noimage[data-hidden] {display: none;}
+.ram-calc__value_image {flex: 0 0 auto; cursor: pointer;}
+.ram-calc__value-image {border: var(--ramcalc-border) solid var(--ramcalc-border-color); padding: calc(var(--ramcalc-offset) * 0.5); align-items: center; justify-content: center; display: flex; flex-direction: column; gap: calc(var(--ramcalc-offset)); border-radius: var(--ramcalc-border-radius);}
+.ram-calc__value-image img {display: block; max-width: 100%; max-height: 100%; border-radius: calc(var(--ramcalc-border-radius) - var(--ramcalc-offset) * 0.5);}
+.ram-calc__value_image input:checked + .ram-calc__value-image {border-color: var(--ramcalc-active-color); box-shadow: 0 0 0 1px var(--ramcalc-active-color);}
+.ram-calc__value_image input[disabled] + .ram-calc__value-image {opacity: 0.5; cursor: default;}
+.ram-calc__value_image[data-hidden] {display: none;}
+.ram-calc__value_image:hover input:not([disabled]) + .ram-calc__value-image .ram-calc__value-title, .ram-calc__value_image input:active:not([disabled]) + .ram-calc__value-image .ram-calc__value-title, .ram-calc__value_image:focus-within input:not([disabled]) + .ram-calc__value-image .ram-calc__value-title {color: var(--ramcalc-active-color);}
+.ram-calc__property-number {display: flex; align-items: center; gap: calc(var(--ramcalc-offset) * 0.5);}
+.ram-calc__property-number input[type='text'] {width: 100%; padding: 0 calc(var(--ramcalc-offset) * 0.25 + var(--ramcalc-border-radius) * 0.25); border: var(--ramcalc-border) solid var(--ramcalc-border-color); outline: none; font: inherit; line-height: 100%; border-radius: var(--ramcalc-border-radius); font-size: 90%; line-height: 100%; height: calc(var(--ramcalc-offset) * 2);}
+.ram-calc__property-number:hover input[type='text']:not([disabled]), .ram-calc__property-number input[type='text']:active:not([disabled]), .ram-calc__property-number:focus-within input[type='text']:not([disabled]) {border-color: var(--ramcalc-active-color);}
+.ram-calc__property-number input[disabled] {opacity: 0.5; cursor: default;}
+.ram-calc__property-range {}
+.ram-calc__range {display: flex; gap: calc(var(--ramcalc-offset) * 0.5); align-items: center; flex-wrap: wrap;}
+.ram-calc__range input[type='range'] {-webkit-appearance: none; padding: calc(var(--ramcalc-offset) * 0.5) 0; cursor: pointer; flex: 1 0 auto; margin: 0; order: 2;}
+.ram-calc__range input[type='range']::-webkit-slider-runnable-track {width: 100%; height: calc(var(--ramcalc-border) * 0.5); background: var(--ramcalc-border-color);}
+.ram-calc__range input[type='range']::-webkit-slider-thumb {border: var(--ramcalc-border) solid var(--ramcalc-border-color); height: var(--ramcalc-offset); width: var(--ramcalc-offset); border-radius: 50%; background: var(--ramcalc-background-color); -webkit-appearance: none; margin-top: calc(var(--ramcalc-offset) * -0.5);}
+.ram-calc__range input[type='range']:not([disabled])::-webkit-slider-thumb {cursor: pointer;}
+.ram-calc__range input[type='range']:not([disabled]):hover::-webkit-slider-thumb, .ram-calc__range input[type='range']:not([disabled]):active::-webkit-slider-thumb, .ram-calc__range input[type='range']:not([disabled]):focus::-webkit-slider-thumb {border-color: var(--ramcalc-active-color);}
+.ram-calc__range input[type='range']::-moz-range-track {width: 100%; height: calc(var(--ramcalc-border) * 0.5); background: var(--ramcalc-border-color);}
+.ram-calc__range input[type='range']::-moz-range-thumb {border: var(--ramcalc-border) solid var(--ramcalc-border-color); height: var(--ramcalc-offset); width: var(--ramcalc-offset); border-radius: 50%; background: var(--ramcalc-background-color); -moz-appearance: none; margin-top: calc(var(--ramcalc-offset) * -0.5);}
+.ram-calc__range input[type='range']:not([disabled])::-moz-range-thumb {cursor: pointer;}
+.ram-calc__range input[type='range']:not([disabled]):hover::-moz-range-thumb, .ram-calc__range input[type='range']:not([disabled]):active::-moz-range-thumb, .ram-calc__range input[type='range']:not([disabled]):focus::-moz-range-thumb {border-color: var(--ramcalc-active-color);}
+.ram-calc__range input[type='range']::-ms-track {width: 100%; height: calc(var(--ramcalc-border) * 0.5); background: var(--ramcalc-border-color);}
+.ram-calc__range input[type='range']::-ms-thumb {border: var(--ramcalc-border) solid var(--ramcalc-border-color); height: var(--ramcalc-offset); width: var(--ramcalc-offset); border-radius: 50%; background: var(--ramcalc-background-color); -moz-appearance: none; margin-top: calc(var(--ramcalc-offset) * -0.5);}
+.ram-calc__range input[type='range']:not([disabled])::-ms-thumb {cursor: pointer;}
+.ram-calc__range input[type='range']:not([disabled]):hover::-ms-thumb, .ram-calc__range input[type='range']:not([disabled]):active::-ms-thumb, .ram-calc__range input[type='range']:not([disabled]):focus::-ms-thumb {border-color: var(--ramcalc-active-color);}
+.ram-calc__range-min {opacity: 0.8; font-size: 90%; line-height: 100%; order: 1;}
+.ram-calc__range-max {opacity: 0.8; font-size: 90%; line-height: 100%; order: 3;}
+.ram-calc__range-valuewrap {display: flex; align-items: center; justify-content: center; gap: calc(var(--ramcalc-offset) * 0.5); order: 4;}
+.ram-calc__range-value {padding: 0 calc(var(--ramcalc-offset) * 0.25 + var(--ramcalc-border-radius) * 0.25); border: var(--ramcalc-border) solid var(--ramcalc-border-color); font: inherit; line-height: 100%; width: calc(var(--ramcalc-offset) * 3); border-radius: var(--ramcalc-border-radius); font-size: 90%; line-height: 100%; height: calc(var(--ramcalc-offset) * 2);}
+.ram-calc__range-value:not([disabled]):hover, .ram-calc__range-value:not([disabled]):active, .ram-calc__range-value:not([disabled]):focus-within {border-color: var(--ramcalc-active-color);}
+.ram-calc__range-measure {}
+@media screen and (max-width: 499px)
+{
+	.ram-calc__range-valuewrap  {width: 100%; }
+}
+.ram-calc__range input[disabled] {opacity: 0.5; cursor: default;}
+.ram-calc__range input[disabled] ~ .ram-calc__range-min, .ram-calc__range input[disabled] ~ .ram-calc__range-max {opacity: 0.5;}
+.ram-calc__calculator-calculations {display: flex; flex-direction: column; gap: var(--ramcalc-offset);}
+.ram-calc__calculator-total-calculations {display: flex; flex-direction: column; gap: var(--ramcalc-offset); padding: calc(var(--ramcalc-offset)); border-top: var(--ramcalc-border) solid var(--ramcalc-border-color);}
+.ram-calc__calculations-title {font-weight: bold;}
+.ram-calc__calculation {display: flex; gap: calc(var(--ramcalc-offset) * 0.5); align-items: baseline;}
+.ram-calc__calculation-title {font-weight: bold;}
+.ram-calc__calculation-result {font-weight: bold; color: var(--ramcalc-active-color); font-size: 120%; line-height: 100%;}
+.ram-calc__calculation-measure {margin-left: calc(var(--ramcalc-offset) * -0.25);}
+.ram-calc__calculation[data-hidden] {display: none;}
+.ram-calc__request {display: flex; flex-direction: column; gap: var(--ramcalc-offset); padding: calc(var(--ramcalc-offset)); border-top: var(--ramcalc-border) solid var(--ramcalc-border-color);}
+.ram-calc__request-description {}
+.ram-calc__request-field {display: flex; flex-direction: column; gap: calc(var(--ramcalc-offset) * 0.5);}
+.ram-calc__request-field-title {font-weight: bold;}
+.ram-calc__request-field-required {color: var(--ramcalc-active-color);}
+.ram-calc__request-field input[type='text'] {width: 100%; padding: 0 calc(var(--ramcalc-offset) * 0.25 + var(--ramcalc-border-radius) * 0.25); border: var(--ramcalc-border) solid var(--ramcalc-border-color); font: inherit; border-radius: var(--ramcalc-border-radius); font-size: 90%; height: calc(var(--ramcalc-offset) * 2);}
+.ram-calc__request-field textarea {width: 100%; padding: calc(var(--ramcalc-offset) * 0.25 + var(--ramcalc-border-radius) * 0.25); border: var(--ramcalc-border) solid var(--ramcalc-border-color); font: inherit; height: calc(var(--ramcalc-offset) * 5); border-radius: var(--ramcalc-border-radius); resize: none; font-size: 90%; line-height: 100%; border-top-right-radius: 0; border-bottom-right-radius: 0; padding-right: 0; overflow-y: scroll;}
+.ram-calc__request-field input[type='text']:hover, .ram-calc__request-field input[type='text']:active, .ram-calc__request-field input[type='text']:focus {border-color: var(--ramcalc-active-color);}
+.ram-calc__request-field textarea:hover, .ram-calc__request-field textarea:active, .ram-calc__request-field textarea:focus {border-color: var(--ramcalc-active-color);}
+.ram-calc__request-field-error {display: none; color: var(--ramcalc-active-color); font-size: 90%; line-height: 100%;}
+.ram-calc__request-field-error[data-hidden] {display: none;}
+.ram-calc__file {border: var(--ramcalc-border) solid var(--ramcalc-border-color); border-radius: var(--ramcalc-border-radius); position: relative; cursor: pointer;}
+.ram-calc__file input[type='file'] {position: absolute; z-index: -100; opacity: 0; width: 100%; height: 100%;}
+.ram-calc__file input[type='text'] {position: absolute; opacity: 0; z-index: -200;}
+.ram-calc__file-title {position: relative; padding: 0 calc(var(--ramcalc-offset) * 0.25 + var(--ramcalc-border-radius) * 0.25); font-size: 90%; line-height: calc(var(--ramcalc-offset) * 2);}
+.ram-calc__file:hover, .ram-calc__file:focus-within {border-color: var(--ramcalc-active-color);}
+.ram-calc__file-size-error {display: none; color: var(--ramcalc-active-color); font-size: 90%; line-height: 100%;}
+.ram-calc__request-submit {display: flex; align-items: center; justify-content: center;}
+.ram-calc__request-submit input[type='button'] {background: var(--ramcalc-active-color); color: var(--ramcalc-background-color); border: none; padding: 0 calc(var(--ramcalc-offset) * 0.5); font: inherit; line-height: 100%; cursor: pointer; border-radius: var(--ramcalc-border-radius); height: calc(var(--ramcalc-offset) * 2);}
+.ram-calc__request-consent {}
+.ram-calc__request-consent label {position: relative;}
+.ram-calc__request-consent label input[type='checkbox'] {position: absolute; z-index: -100; opacity: 0;}
+.ram-calc__request-consent label span {display: flex; gap: calc(var(--ramcalc-offset) * 0.5); align-items: center; font-size: 90%; line-height: 100%; position: relative;}
+.ram-calc__request-consent label span:before {content: ''; position: relative; box-shadow: 0 0 0 var(--ramcalc-border) var(--ramcalc-border-color); border: calc(var(--ramcalc-offset) * 0.2) solid var(--ramcalc-background-color); background: transparent; display: block; width: var(--ramcalc-offset); height: var(--ramcalc-offset); flex: 0 0 auto; border-radius: calc(var(--ramcalc-border-radius) * 0.25);}
+.ram-calc__request-consent label input:checked + span:before {background: var(--ramcalc-active-color);}
+.ram-calc__request-consent:hover, .ram-calc__request-consent:active, .ram-calc__request-consent:focus-within {color: var(--ramcalc-active-color);}
+.ram-calc__content-place:empty {display: none;}
