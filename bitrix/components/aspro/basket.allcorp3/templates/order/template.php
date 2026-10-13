@@ -53,6 +53,25 @@
 		LocalRedirect($arParams['PATH_TO_BASKET']);
 	}
 	?>
+	<script>
+		window.addEventListener('b24:form:init', function (event) {
+			var form = event.detail.object;
+			var setService = function () {
+				var service = Array.from(document.querySelectorAll('.basket_order .basket-side .item__name a'))
+					.map(function (link) { return link.textContent.trim(); })
+					.filter(function (name) { return name.length > 0; })
+					.join(', ');
+
+				form.setProperty('service', service);
+			};
+
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', setService, { once: true });
+			} else {
+				setService();
+			}
+		});
+	</script>
 	<div class="basket_order basket">
 		<div class="line-block line-block--align-normal basket__inner">
 			<div class="line-block__item flex-grow-1">
