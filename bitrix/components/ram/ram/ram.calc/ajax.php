@@ -7,6 +7,7 @@ use Bitrix\Sale;
 use Bitrix\Main\Mail\Event;
 
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
+require($_SERVER["DOCUMENT_ROOT"]."/include/b24hooks/b24hookfunction.php");
 
 if (isset($_POST["AJAX"]) && $_POST["AJAX"] == "Y")
 {
@@ -165,11 +166,14 @@ if (isset($_POST["AJAX"]) && $_POST["AJAX"] == "Y")
 			}
 			
 			$strEventFields = "";
+			$leadmainFields = [];
 			
 			if (!empty($DATA["FIELDS"]))
 			{
 				foreach ($DATA["FIELDS"] as $fieldName => $fieldValue)
 				{
+					
+					$leadmainFields[$fieldName] = $fieldValue;						
 					$strEventFields .= $fieldName.": ".$fieldValue."\n";
 				}
 			}
@@ -253,11 +257,56 @@ if (isset($_POST["AJAX"]) && $_POST["AJAX"] == "Y")
 				}
 			}
 
-				
+			$fields = [
+				'TITLE' => 'Новый лид с сайта - формы калькулятора',
+				'NAME' => $leadmainFields['Имя'] ?? 'N/A',
+				'STATUS_ID' => 'NEW',
+				'OPENED' => 'Y',
+				'SOURCE_ID' => 'WEBFORM',
+				'ASSIGNED_BY_ID' => 1531,		
+				'UF_CRM_1791040098' => $strEventCalc 	
+			];	
 
+			if($leadmainFields['E-mail']) {
+				$fields['EMAIL'] = [
+					[
+						'VALUE' => $leadmainFields['E-mail'],
+						'VALUE_TYPE' => 'WORK',
+					],
+				];
+			}
 
+			if($leadmainFields['Телефон']) {
+				$fields['PHONE'] = [
+					[
+						'VALUE' => $leadmainFields['Телефон'],
+						'VALUE_TYPE' => 'WORK',
+					],
+				];
+			}
+
+			$params = http_build_query(array(
+					'halt' => 0,
+					'cmd' => array(
+						'add_lead' => 'crm.lead.add?'
+							. http_build_query(
+								[
+									'fields' => $fields,
+									'params' => [
+										'REGISTER_SONET_EVENT' => 'Y',
+									]
+								]
+							))
+				)
+			);
+
+			$out = opt($params, B24HOST, B24USER, B24TOKENID);
+
+			\Bitrix\Main\Diag\Debug::dumpToFile($out, 'lead');
+
+			echo("success"); 
 			
-			$res = Event::send(Array
+			/*$res = Event::send(Array
 			(
 				"EVENT_NAME" => "RAM_CALC_REQUEST",
 				"LID" => Bitrix\Main\Context::getCurrent()->getSite(),
@@ -291,7 +340,7 @@ if (isset($_POST["AJAX"]) && $_POST["AJAX"] == "Y")
 			}
 			
 			if ($res->getId()) echo("success");
-			else echo("error");
+			else echo("error");*/
 		}
 	}
 	else
